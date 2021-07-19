@@ -27,6 +27,7 @@ class PostFactory extends Factory
         $created = $this->faker->dateTimeBetween('-1 years','-1 days');
 
         return [
+            'author_id'=>rand(1,4),
             'title'=> $title,
             'short_title'=>$short_title,
             'description'=> $this->faker->realText(rand(100,500)),
