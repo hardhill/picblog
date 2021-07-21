@@ -1,45 +1,34 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-    <title>Document</title>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+@extends('layouts.layout')
 
-        <div class="container collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="col-6 navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Главная</a>
-                </li>
-                <li class="nav-item offset-3">
-                    <a class="nav-link active" aria-current="page" href="/">Создать пост</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Найти..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Поиск</button>
-            </form>
-        </div>
-    </div>
-</nav>
+@section('content')
+    @if(isset($_GET['search'])&&mb_strlen($_GET['search'])>0)
+        @if(count($posts))
+            <h2>Результаты поиска по запросу "<?php echo $_GET['search']?>"</h2>
+            <p class="lead">Всего найдено постов: {{ count($posts) }}</p>
+        @else
+            <h2>По запросу "<?php echo $_GET['search']?>" ничего не найдено</h2>
+            <a class="btn btn-outline-primary" href="{{ route('post.index') }}">Отобразить все посты</a>
+        @endif
+    @endif
 
-<div class="container">
     <div class="row">
         @foreach($posts as $post)
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header">{{ $post->short_title }}</div>
-                <div class="card-body">{{ $post->description }}</div>
+            <div class="col-6">
+                <div class="card mb-2">
+                    <div class="card-header"><h2>{{ $post->short_title }}</h2></div>
+                    <div class="card-body">
+                        <div class="card-img"
+                             style="background-image: url('{{ is_null($post->img) ? asset('img/default.jpg'):$post->img }}')"></div>
+                        <div class="card-author">Автор: {{ $post->name }}</div>
+                        <a href="#" class="btn btn-outline-primary">Посмотреть пост</a>
+                    </div>
+                </div>
             </div>
-        </div>
         @endforeach
     </div>
-</div>
-</body>
-</html>
+
+    @if(!isset($_GET['search'])||mb_strlen($_GET['search'])==0)
+        <div class="mx-auto mt-2" style="width: max-content;"> {{ $posts->links() }} </div>
+    @endif
+
+@endsection

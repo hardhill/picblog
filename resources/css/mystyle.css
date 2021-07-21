@@ -1,0 +1,17 @@
+body{
+    background-color: #fff;
+}
+nav{
+    margin-bottom: 2rem;
+}
+
+.card-img{
+    height: 200px;
+    background-position: center center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.card-img, .card-author{
+    margin-bottom: 1rem;
+}
