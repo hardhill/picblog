@@ -12,6 +12,9 @@ nav{
     background-size: cover;
     background-repeat: no-repeat;
 }
-.card-img, .card-author{
+.card-img, .card-author, .card-date{
     margin-bottom: 1rem;
+}
+.card-img__max{
+    height: 500px;
 }

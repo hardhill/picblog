@@ -24,7 +24,7 @@ class PostFactory extends Factory
         $title = $this->faker->realText(rand(10,40));
         $short_title = mb_strlen($title)>30?mb_substr($title,0,30).'...':$title;
         $img = "https://via.placeholder.com/400/5611A8/C0C0C0/?text=Picture";
-        $created = $this->faker->dateTimeBetween('-1 years','-1 days');
+        $created = $this->faker->dateTimeBetween('-1 months','-1 days');
 
         return [
             'author_id'=>rand(1,4),
