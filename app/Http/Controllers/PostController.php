@@ -70,7 +70,7 @@ class PostController extends Controller
     {
         $post = Post::Find($id);
 
-        return view('posts.show',compact('post',$post));
+        return view('posts.show',compact('post'));
     }
 
     /**
@@ -81,7 +81,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::Find($id);
+        return view('posts.edit',compact('post'));
     }
 
     /**
@@ -93,7 +94,8 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        return redirect()->route('post.show',['id'=>$id])->with('success','Пост успешно изменен!');
     }
 
     /**
