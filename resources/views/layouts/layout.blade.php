@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}">
-    <title>Document</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+    <title>{{ $title_page }}</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

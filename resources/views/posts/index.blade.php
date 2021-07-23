@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout',['title_page'=>'Главная страница'])
 
 @section('content')
     @if(isset($_GET['search'])&&mb_strlen($_GET['search'])>0)

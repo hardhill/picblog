@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout',['title_page'=>'Создать новый пост'])
 
 @section('content')
     <form action="{{ route('post.index') }}" method="post" enctype="multipart/form-data">

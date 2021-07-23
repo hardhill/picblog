@@ -31,7 +31,7 @@ class Post extends Model
         return $posts;
     }
 
-    public static function Find($id)
+    public static function FindById($id)
     {
         $post = DB::table('posts')->join('users','author_id','=','users.id')
                 ->select('posts.*','name')

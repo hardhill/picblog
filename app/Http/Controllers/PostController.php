@@ -68,7 +68,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::Find($id);
+        $post = Post::FindById($id);
 
         return view('posts.show',compact('post'));
     }
@@ -81,7 +81,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::Find($id);
+        $post = Post::FindById($id);
         return view('posts.edit',compact('post'));
     }
 
@@ -94,7 +94,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->short_title = Str::length($request->title)>30? Str::substr($request->title,0,30) . '...':$request->title;
+        $post->description = $request->description;
+        if($request->file('img')){
+            $path = Storage::putFile('public/blogimg',$request->file('img'));
+            $url = Storage::url($path);
+            $post->img = $url;
+        }
+        $post->save();
         return redirect()->route('post.show',['id'=>$id])->with('success','Пост успешно изменен!');
     }
 
@@ -106,6 +115,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('post.index')->with('success','Пост успешно удален!');
     }
 }

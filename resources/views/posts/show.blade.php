@@ -1,5 +1,5 @@
 
-@extends('layouts.layout')
+@extends('layouts.layout',['title_page'=>"Пост№ $post->id $post->short_title"])
 
 @section('content')
     <div class="row">
@@ -15,7 +15,12 @@
                         <div class="card-btn">
                             <a href="{{ route('post.index') }}" class="btn btn-outline-primary">На главную</a>
                             <a href="{{ route('post.edit',['id'=>$post->id]) }}" class="btn btn-outline-success">Редактировать</a>
-                            <a href="{{ route('post.destroy',['id'=>$post->id]) }}" class="btn btn-outline-danger">Удалить</a>
+                            <form action="{{ route('post.destroy',['id'=>$post->id]) }}" method="post" onsubmit="if(confirm('Удалить пост?')){return true}else{return false}">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" class="btn btn-outline-danger" value="Удалить">
+                            </form>
+
                         </div>
 
                     </div>
