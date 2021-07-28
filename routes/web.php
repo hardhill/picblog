@@ -23,3 +23,7 @@ Route::post('post/',[PostController::class,'store'])->name('post.store');
 Route::get('post/edit/{id}',[PostController::class,'edit'])->name('post.edit');
 Route::post('post/show/{id}',[PostController::class,'update'])->name('post.update');
 Route::delete('post/{id}',[PostController::class,'destroy'])->name('post.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
